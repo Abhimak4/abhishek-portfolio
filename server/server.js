@@ -10,14 +10,16 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors({
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://abhishek-portfolio-pearl-five.vercel.app",
-      "https://abhimak4.net",
-      "https://www.abhimak4.net"
-    ];
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://abhishek-portfolio-pearl-five.vercel.app",
+    "https://abhimak4.net",
+    "https://www.abhimak4.net"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
 
     if (!origin) return callback(null, true);
 
