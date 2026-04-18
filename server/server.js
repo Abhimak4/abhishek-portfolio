@@ -9,7 +9,11 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://abhishek-portfolio.vercel.app"
+  ]
 }));
 
 app.use(express.json());
@@ -49,6 +53,8 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
