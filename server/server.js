@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { Resend } from "resend";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
@@ -13,7 +14,9 @@ app.use(cors({
     const allowedOrigins = [
       "http://localhost:5173",
       "http://localhost:5174",
-      "https://abhishek-portfolio-pearl-five.vercel.app"
+      "https://abhishek-portfolio-pearl-five.vercel.app",
+      "https://abhimak4.net",
+      "https://www.abhimak4.net"
     ];
 
     if (!origin) return callback(null, true);
@@ -33,11 +36,47 @@ app.use(cors({
 
 app.use(express.json());
 
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Too many requests. Please try again later."
+  }
+});
+
+app.use("/contact", contactLimiter);
+
 app.post("/contact", async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message, company } = req.body;
+
+  // Honeypot field for spam bots
+  if (company) {
+    return res.status(200).json({
+      success: true,
+      message: "Ignored"
+    });
+  }
+
+  // Basic validation
+  if (!name || !email || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "All fields are required."
+    });
+  }
+
+  if (message.trim().length < 5) {
+    return res.status(400).json({
+      success: false,
+      message: "Message is too short."
+    });
+  }
 
   try {
-    const result = await resend.emails.send({
+    const adminEmail = await resend.emails.send({
       from: "Portfolio Contact <noreply@abhimak4.net>",
       to: ["abhi.mak4@gmail.com"],
       subject: `New Portfolio Message from ${name}`,
@@ -51,7 +90,19 @@ app.post("/contact", async (req, res) => {
       `
     });
 
-    console.log("Email sent:", result);
+    const autoReply = await resend.emails.send({
+      from: "Abhishek Makwana <noreply@abhimak4.net>",
+      to: [email],
+      subject: "Thanks for contacting me",
+      html: `
+        <p>Hi ${name},</p>
+        <p>Thanks for reaching out. I received your message and will get back to you soon.</p>
+        <p>Best regards,<br/>Abhishek Makwana</p>
+      `
+    });
+
+    console.log("Admin email:", adminEmail);
+    console.log("Auto reply:", autoReply);
 
     res.status(200).json({
       success: true,
@@ -63,9 +114,13 @@ app.post("/contact", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Email failed",
-      error: error.message
+      error: error?.message || "Unknown error"
     });
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("Backend is running.");
 });
 
 const PORT = process.env.PORT || 5000;

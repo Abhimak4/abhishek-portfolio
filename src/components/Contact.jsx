@@ -4,7 +4,8 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
+    company: "" // ✅ ADD THIS (honeypot field)
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,8 @@ function Contact() {
         setFormData({
           name: "",
           email: "",
-          message: ""
+          message: "",
+          company: "" // ✅ RESET THIS TOO
         });
       } else {
         console.error(data);
@@ -63,6 +65,19 @@ function Contact() {
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>
+
+        {/* ✅ HONEYPOT FIELD (ANTI-SPAM) */}
+        <div style={{ display: "none" }}>
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            autoComplete="off"
+            tabIndex="-1"
+          />
+        </div>
+
         <div className="input-group">
           <input
             type="text"
