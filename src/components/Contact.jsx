@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 function Contact() {
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,6 +10,8 @@ function Contact() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,46 +20,42 @@ function Contact() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
 
-  setLoading(true);
-  setStatus("");
-
-  try {
-    const response = await fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
-
-    const data = await response.json();
-    console.log("Server response:", data);
-
-    if (response.ok) {
-      setStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        message: ""
+    try {
+      const response = await fetch(`${API_URL}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
       });
-    } else {
-      console.error("Backend error:", data);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          message: ""
+        });
+      } else {
+        console.error(data);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error(error);
       setStatus("error");
     }
-  } catch (error) {
-    console.error("Fetch error:", error);
-    setStatus("error");
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   return (
-
     <section id="contact">
-
       <h2>GET IN TOUCH</h2>
 
       <p className="contact-subtitle">
@@ -66,7 +63,6 @@ function Contact() {
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>
-
         <div className="input-group">
           <input
             type="text"
@@ -100,36 +96,22 @@ function Contact() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="transmit-btn"
-          disabled={loading}
-        >
-
+        <button type="submit" className="transmit-btn" disabled={loading}>
           {loading ? "Sending..." : "TRANSMIT DATA"}
-
         </button>
-
       </form>
 
       {status === "success" && (
-        <p className="success-message">
-          ✅ Message sent successfully!
-        </p>
+        <p className="success-message">✅ Message sent successfully!</p>
       )}
 
       {status === "error" && (
-        <p className="error-message">
-          ❌ Something went wrong. Try again.
-        </p>
+        <p className="error-message">❌ Something went wrong. Try again.</p>
       )}
 
       <div className="social-footer">
-
         <span className="social-label">// OR CONNECT VIA SOCIAL</span>
-
         <div className="social-links">
-
           <a
             href="https://www.linkedin.com/in/abhimak4"
             target="_blank"
@@ -138,18 +120,11 @@ function Contact() {
           >
             LinkedIn
           </a>
-
-          <a
-            href="mailto:Abhi.mak4@gmail.com"
-            className="social-btn"
-          >
+          <a href="mailto:Abhi.mak4@gmail.com" className="social-btn">
             Email
           </a>
-
         </div>
-
       </div>
-
     </section>
   );
 }
