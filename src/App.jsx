@@ -6,7 +6,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
-import GalaxyBackground from "./components/GalaxyBackground";
+import GalaxyPro from "./components/GalaxyPro";
 
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <GalaxyBackground />
+      <GalaxyPro />
       <div className="animated-bg"></div>
 
       <div className="hero-bg">
