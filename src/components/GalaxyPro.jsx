@@ -23,66 +23,94 @@ export default function GalaxyPro() {
           enable: true,
           zIndex: -1,
         },
+
         background: {
-          color: "#0f172a",
+          color: "#0b1f3b",
         },
+
+        fpsLimit: 60,
+
         particles: {
           number: {
-            value: 90,
+            value: 120,
             density: {
               enable: true,
-              area: 900,
+              area: 800,
             },
           },
+
           color: {
-            value: "#38bdf8",
+            value: "#00d4ff",
           },
+
+          shape: {
+            type: "circle",
+          },
+
           size: {
-            value: { min: 1, max: 2.5 },
+            value: {
+              min: 1,
+              max: 3,
+            },
           },
+
           opacity: {
-            value: { min: 0.3, max: 0.9 },
+            value: 0.7,
           },
+
           links: {
             enable: true,
-            distance: 150,
-            color: "#38bdf8",
-            opacity: 0.25,
-            width: 1,
+            distance: 170,
+            color: "#00d4ff",
+            opacity: 0.6,
+            width: 1.2,
           },
+
           move: {
             enable: true,
-            speed: 0.6,
+            speed: 1,
             direction: "none",
+            random: false,
+            straight: false,
             outModes: {
               default: "bounce",
             },
           },
         },
+
         interactivity: {
+          detectsOn: "window",
+
           events: {
             onHover: {
               enable: true,
               mode: "grab",
             },
+
             onClick: {
               enable: true,
               mode: "push",
             },
-            resize: true,
+
+            resize: {
+              enable: true,
+            },
           },
+
           modes: {
             grab: {
-              distance: 190,
+              distance: 220,
               links: {
-                opacity: 0.9,
+                opacity: 1,
               },
             },
+
             push: {
-              quantity: 3,
+              quantity: 5,
             },
           },
         },
+
         detectRetina: true,
       }}
     />
