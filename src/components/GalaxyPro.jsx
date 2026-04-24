@@ -21,7 +21,7 @@ export default function GalaxyPro() {
       options={{
   fullScreen: {
     enable: true,
-    zIndex: -1,
+    zIndex: -2,
   },
 
   background: {
