@@ -11,7 +11,11 @@ import GalaxyPro from "./components/GalaxyPro";
 
 function App() {
   useEffect(() => {
-    const glow1 = document.querySelector(".glow1");
+    useEffect(() => {
+  document.body.style.overflowX = "hidden";
+}, []);
+
+const glow1 = document.querySelector(".glow1");
     const glow2 = document.querySelector(".glow2");
 
     const handleMouseMove = (e) => {
