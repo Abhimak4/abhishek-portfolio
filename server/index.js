@@ -9,12 +9,19 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  
+  origin: [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://abhimak4.net",
+  "https://www.abhimak4.net"
+]
+  
 }));
 
 app.use(express.json());
 
-app.post("/api/contact", async (req, res) => {
+app.post("/contact", async (req, res) => {
   try {
     const { name, email, message } = req.body;
 
@@ -26,10 +33,10 @@ app.post("/api/contact", async (req, res) => {
     }
 
     const adminEmail = await resend.emails.send({
-      from: "Portfolio Contact <noreply@yourdomain.com>",
-      to: ["your-email@yourdomain.com"],
+      from: "Abhishek Makwana <noreply@abhimak4.net>",
+      to: ["abhi.mak4@gmail.com"],
       subject: `New portfolio enquiry from ${name}`,
-      reply_to: email,
+      replyTo: email,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
