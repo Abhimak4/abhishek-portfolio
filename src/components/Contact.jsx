@@ -98,7 +98,7 @@ function Contact() {
         </div>
 
         <button type="submit" className="transmit-btn" disabled={loading}>
-          {loading ? "Sending..." : "TRANSMIT DATA"}
+          {loading ? "Sending..." : "Submit"}
         </button>
       </form>
 
