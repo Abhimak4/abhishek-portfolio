@@ -32,7 +32,7 @@ export default function GalaxyPro() {
 
   particles: {
     number: {
-      value: 65,
+      value: 80,
       density: {
         enable: true,
         area: 1100,
@@ -53,10 +53,10 @@ export default function GalaxyPro() {
 
     links: {
       enable: true,
-      distance: 115,
+      distance: 150,
       color: "#38bdf8",
-      opacity: 0.22,
-      width: 0.7,
+      opacity: 0.42,
+      width: 1,
     },
 
     move: {
@@ -85,9 +85,9 @@ export default function GalaxyPro() {
 
     modes: {
       grab: {
-        distance: 150,
+        distance: 185,
         links: {
-          opacity: 0.55,
+          opacity: 0.85,
         },
       },
 
