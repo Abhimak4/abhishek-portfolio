@@ -9,7 +9,15 @@ const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://abhimak4.net",
+    "https://www.abhimak4.net",
+    "https://abhishek-portfolio-pearl-five.vercel.app"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
 }));
 
 app.use(express.json());
