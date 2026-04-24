@@ -1,0 +1,19 @@
+/* Fix unwanted scrollbars */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Prevent layout overflow issues */
+* {
+  box-sizing: border-box;
+}
+
+/* Fix particles background overflow */
+#tsparticles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
