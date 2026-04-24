@@ -1,3 +1,4 @@
+import GalaxyBackground from "./components/GalaxyBackground";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <>
+      <GalaxyBackground />
       <div className="animated-bg"></div>
 
       <div className="hero-bg">
