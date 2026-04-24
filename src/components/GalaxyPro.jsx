@@ -31,67 +31,71 @@ export default function GalaxyPro() {
   fpsLimit: 60,
 
   particles: {
-  number: {
-    value: 70,
-    density: {
-      enable: true,
-      area: 1200,
-    },
-  },
-
-  color: {
-    value: "#38bdf8",
-  },
-
-  size: {
-    value: { min: 1, max: 2 },
-  },
-
-  opacity: {
-    value: { min: 0.25, max: 0.8 },
-  },
-
-  // ❌ REMOVE always-visible lines
-  links: {
-    enable: false,
-  },
-
-  move: {
-    enable: true,
-    speed: 0.35,
-    direction: "none",
-    outModes: {
-      default: "out",
-    },
-  },
-},
-
-interactivity: {
-  events: {
-    onHover: {
-      enable: true,
-      mode: "grab",
-    },
-    onClick: {
-      enable: true,
-      mode: "push",
-    },
-  },
-
-  modes: {
-    grab: {
-      distance: 160,
-      links: {
-        opacity: 0.6,
-        color: "#38bdf8",
+    number: {
+      value: 100,
+      density: {
+        enable: true,
+        area: 1500,
       },
     },
 
-    push: {
-      quantity: 2,
+    color: {
+      value: "#00d4ff",
+    },
+
+    size: {
+      value: { min: 1, max: 2.5 },
+    },
+
+    opacity: {
+      value: 0.8,
+    },
+
+    links: {
+      enable: true,
+      distance: 150,
+      color: "#38bdf8",
+      opacity: 0.5,
+      width: 1.4,
+    },
+
+    move: {
+      enable: true,
+      speed: 0.45,
+      outModes: {
+        default: "out", // 🔥 important for production stability
+      },
     },
   },
-},
+
+  interactivity: {
+    detectsOn: "window",
+
+    events: {
+      onHover: {
+        enable: true,
+        mode: "grab",
+      },
+
+      onClick: {
+        enable: true,
+        mode: "push",
+      },
+    },
+
+    modes: {
+      grab: {
+        distance: 200,
+        links: {
+          opacity: 0.95,
+        },
+      },
+
+      push: {
+        quantity: 2,
+      },
+    },
+  },
 
   detectRetina: true,
 }}
