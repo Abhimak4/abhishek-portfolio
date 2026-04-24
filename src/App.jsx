@@ -32,6 +32,7 @@ function App() {
 
   return (
     <>
+      <GalaxyBackground />
       <div className="animated-bg"></div>
 
       <div className="hero-bg">
