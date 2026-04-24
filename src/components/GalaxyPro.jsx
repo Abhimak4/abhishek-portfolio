@@ -19,100 +19,86 @@ export default function GalaxyPro() {
     <Particles
       id="tsparticles"
       options={{
-        fullScreen: {
-          enable: true,
-          zIndex: -1,
+  fullScreen: {
+    enable: true,
+    zIndex: -1,
+  },
+
+  background: {
+    color: "#0b1f3b",
+  },
+
+  fpsLimit: 60,
+
+  particles: {
+    number: {
+      value: 100,
+      density: {
+        enable: true,
+        area: 900,
+      },
+    },
+
+    color: {
+      value: "#00d4ff",
+    },
+
+    size: {
+      value: { min: 1, max: 2.5 },
+    },
+
+    opacity: {
+      value: 0.6,
+    },
+
+    links: {
+      enable: true,
+      distance: 160,
+      color: "#00d4ff",
+      opacity: 0.5,
+      width: 1,
+    },
+
+    move: {
+      enable: true,
+      speed: 0.8,
+      outModes: {
+        default: "out", // 🔥 important for production stability
+      },
+    },
+  },
+
+  interactivity: {
+    detectsOn: "window",
+
+    events: {
+      onHover: {
+        enable: true,
+        mode: "grab",
+      },
+
+      onClick: {
+        enable: true,
+        mode: "push",
+      },
+    },
+
+    modes: {
+      grab: {
+        distance: 200,
+        links: {
+          opacity: 0.8,
         },
+      },
 
-        background: {
-          color: "#0b1f3b",
-        },
+      push: {
+        quantity: 4,
+      },
+    },
+  },
 
-        fpsLimit: 60,
-
-        particles: {
-          number: {
-            value: 120,
-            density: {
-              enable: true,
-              area: 800,
-            },
-          },
-
-          color: {
-            value: "#00d4ff",
-          },
-
-          shape: {
-            type: "circle",
-          },
-
-          size: {
-            value: {
-              min: 1,
-              max: 3,
-            },
-          },
-
-          opacity: {
-            value: 0.7,
-          },
-
-          links: {
-            enable: true,
-            distance: 170,
-            color: "#00d4ff",
-            opacity: 0.6,
-            width: 1.2,
-          },
-
-          move: {
-            enable: true,
-            speed: 1,
-            direction: "none",
-            random: false,
-            straight: false,
-            outModes: {
-              default: "bounce",
-            },
-          },
-        },
-
-        interactivity: {
-          detectsOn: "window",
-
-          events: {
-            onHover: {
-              enable: true,
-              mode: "grab",
-            },
-
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-
-            resize: {
-              enable: true,
-            },
-          },
-
-          modes: {
-            grab: {
-              distance: 220,
-              links: {
-                opacity: 1,
-              },
-            },
-
-            push: {
-              quantity: 5,
-            },
-          },
-        },
-
-        detectRetina: true,
-      }}
+  detectRetina: true,
+}}
     />
   );
 }
